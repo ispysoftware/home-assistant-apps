@@ -47,6 +47,13 @@ else
     link_dir "$MEDIA" "$REC"
 fi
 
+# Home Assistant's ingress proxy (Supervisor 172.30.32.2, reached from HA core
+# 172.30.32.1) adds X-Forwarded-For. Trusting it lets Agent see the real
+# browser address: local browsers count as local, remote ones (HA remote
+# access) still need Agent's remote-access license. Read by Agent versions
+# that support AGENT_TRUSTED_PROXIES; older ones ignore it.
+export AGENT_TRUSTED_PROXIES="172.30.32.1 172.30.32.2"
+
 echo "Agent DVR: config in the app config folder, recordings in $REC, models in $DATA/models"
 
 exec "$AGENT/Agent.sh"
