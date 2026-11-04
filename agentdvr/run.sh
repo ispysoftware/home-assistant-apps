@@ -54,6 +54,12 @@ fi
 # that support AGENT_TRUSTED_PROXIES; older ones ignore it.
 export AGENT_TRUSTED_PROXIES="172.30.32.1 172.30.32.2"
 
+# The web UI port is fixed: the sidebar panel (ingress_port), the watchdog and
+# the Agent DVR integration all use 8090. If 8090 is busy at startup Agent falls
+# back to a random port and saves it, which would leave the panel stuck on
+# "starting" for good; the environment wins over that saved port.
+export AGENTDVR_WEBUI_PORT=8090
+
 echo "Agent DVR: config in the app config folder, recordings in $REC, models in $DATA/models"
 
 exec "$AGENT/Agent.sh"
