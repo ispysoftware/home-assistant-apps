@@ -1,7 +1,7 @@
 # Thin wrapper around the official image. The Supervisor builds this on the
 # device and passes BUILD_VERSION (the app's version from config.yaml); the
 # default is only a fallback and is bumped together with config.yaml.
-ARG BUILD_VERSION=8.1.7.0
+ARG BUILD_VERSION=8.2.3.0
 FROM ispysoftware/agentdvr:${BUILD_VERSION}
 
 COPY run.sh /run.sh

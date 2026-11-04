@@ -1,7 +1,7 @@
 name: Agent DVR
 # Must match an ispysoftware/agentdvr image tag: the Dockerfile builds FROM that tag.
 # Bump this (and BUILD_VERSION in the Dockerfile) on every Agent DVR release.
-version: "8.1.7.0"
+version: "8.2.3.0"
 slug: agentdvr
 description: Free local video surveillance with AI object detection, recording and alerts for IP, ONVIF and USB cameras.
 url: https://www.ispyconnect.com/
