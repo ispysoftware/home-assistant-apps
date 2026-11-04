@@ -60,6 +60,18 @@ export AGENT_TRUSTED_PROXIES="172.30.32.1 172.30.32.2"
 # "starting" for good; the environment wins over that saved port.
 export AGENTDVR_WEBUI_PORT=8090
 
+# With host networking another app (or a second copy of this one) can already
+# hold 8090. Agent would then fall back to a random port while the panel, the
+# watchdog and the integration kept talking to whatever owns 8090 - so stop
+# with a plain message instead. (bash's /dev/tcp: connects only if something
+# is listening.)
+if (exec 3<>/dev/tcp/127.0.0.1/8090) 2>/dev/null; then
+    echo "ERROR: Port 8090 is already in use by another app or service on this machine."
+    echo "Agent DVR needs it for its web interface and the Home Assistant sidebar panel."
+    echo "Stop the other one (or the other copy of Agent DVR), then start Agent DVR again."
+    exit 1
+fi
+
 echo "Agent DVR: config in the app config folder, recordings in $REC, models in $DATA/models"
 
 exec "$AGENT/Agent.sh"
