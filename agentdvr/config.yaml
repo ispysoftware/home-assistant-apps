@@ -22,6 +22,17 @@ ports:
 ports_description:
   8090/tcp: Web UI
 webui: http://[HOST]:[PORT:8090]/
+
+# Agent's UI in Home Assistant's sidebar (ingress), proxied under
+# /api/hassio_ingress/<token>/. Needs Agent 8.2.4.0+: the web UI fix for HA's
+# same-origin frame, AGENT_TRUSTED_PROXIES (set in run.sh) so LAN browsers
+# count as local, and the remote check so HA remote access (Nabu Casa, tunnel
+# apps) still needs Agent's remote-access licence.
+ingress: true
+ingress_port: 8090
+panel_icon: mdi:cctv
+panel_title: Agent DVR
+
 # TCP, not HTTP: first start on a Raspberry Pi can take 30s+ and an HTTP
 # watchdog would restart it mid-boot.
 watchdog: tcp://[HOST]:[PORT:8090]
