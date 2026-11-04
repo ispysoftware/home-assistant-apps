@@ -40,6 +40,13 @@ watchdog: tcp://[HOST]:[PORT:8090]
 # GPU decode/encode (Intel/AMD /dev/dri) and USB cameras.
 video: true
 
+# Use Home Assistant's MQTT broker (the Mosquitto app) when there is one: Agent
+# reads it from the Supervisor (MQTTGateway.ApplySupervisorBroker) and switches
+# on MQTT discovery, so cameras appear in Home Assistant automatically.
+# Optional ("want"): without a broker the app works as before.
+services:
+  - mqtt:want
+
 map:
   # Agent's config folder, mounted at the exact path the image expects so the
   # image's own Docker checks (persistent-mount warning, GPL FFmpeg location)

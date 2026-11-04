@@ -12,12 +12,16 @@ You can also open Agent DVR directly at `http://<your-home-assistant-ip>:8090`, 
 
 ## Connect it to Home Assistant
 
-Agent DVR has an official Home Assistant integration that adds your cameras, arming and recording controls as entities:
+There are two ways, and they work together.
+
+**Automatic, over MQTT.** If you use Home Assistant's **Mosquitto broker** app (with the MQTT integration that Home Assistant offers to set up for it), Agent DVR connects to it by itself and turns on Home Assistant discovery. Every camera and microphone you add then appears in Home Assistant as a device with motion, alert, connected and recording sensors and switches to arm, enable or disable it, with no setup. Install Mosquitto before Agent DVR, or restart Agent DVR after installing it. If you've already set up a different MQTT broker in Agent DVR, it's left as it is. See [Home Assistant in the user guide](https://www.ispyconnect.com/docs/agent/mqtt#home-assistant).
+
+**The Agent DVR integration** adds your cameras' live video, an alarm panel and recording actions:
 
 1. Go to **Settings > Devices & services > Add integration** and choose **Agent DVR**.
 2. Enter host `127.0.0.1` and port `8090`.
 
-See the [integration documentation](https://www.home-assistant.io/integrations/agent_dvr/) for details. Agent DVR can also publish events over MQTT: see [MQTT in the user guide](https://www.ispyconnect.com/docs/agent/about).
+See the [integration documentation](https://www.home-assistant.io/integrations/agent_dvr/) for details.
 
 ## Where things are stored
 
