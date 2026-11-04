@@ -6,9 +6,9 @@ FROM ispysoftware/agentdvr:${BUILD_VERSION}
 
 # TEST BRANCH ONLY (ingress-test): lay a local Linux64 build over the image,
 # the same way the image itself installs the release zip. Served from the dev
-# PC by serve-ha-test-build.ps1 on its Hyper-V Default Switch address, which
-# can change after a Windows restart: update TEST_BUILD_URL if it does.
-ARG TEST_BUILD_URL=http://172.19.48.1:8765/agent.tar.gz
+# PC's LAN address by serve-ha-test-build.ps1 (-ServeIP; the test VM is bridged
+# onto the LAN). If the PC's address changes, update both.
+ARG TEST_BUILD_URL=http://192.168.0.162:8765/agent.tar.gz
 ADD ${TEST_BUILD_URL} /tmp/agent.tar.gz
 RUN tar -xzf /tmp/agent.tar.gz -C /AgentDVR \
  && rm -f /tmp/agent.tar.gz \
