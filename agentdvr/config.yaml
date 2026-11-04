@@ -1,0 +1,49 @@
+name: Agent DVR
+# Must match an ispysoftware/agentdvr image tag: the Dockerfile builds FROM that tag.
+# Bump this (and BUILD_VERSION in the Dockerfile) on every Agent DVR release.
+version: "8.1.7.0"
+slug: agentdvr
+description: Free local video surveillance with AI object detection, recording and alerts for IP, ONVIF and USB cameras.
+url: https://www.ispyconnect.com/
+arch:
+  - aarch64
+  - amd64
+stage: experimental
+startup: services
+boot: auto
+
+# Host networking: ONVIF discovery needs multicast, and WebRTC uses TURN on
+# 3478 plus 50000-50100 UDP, which would otherwise all need mapping. It also
+# lets the Agent DVR integration connect to 127.0.0.1:8090.
+host_network: true
+ports:
+  8090/tcp: 8090
+ports_description:
+  8090/tcp: Web UI
+webui: http://[HOST]:[PORT:8090]/
+# TCP, not HTTP: first start on a Raspberry Pi can take 30s+ and an HTTP
+# watchdog would restart it mid-boot.
+watchdog: tcp://[HOST]:[PORT:8090]
+
+# GPU decode/encode (Intel/AMD /dev/dri) and USB cameras.
+video: true
+
+map:
+  # Agent's config folder, mounted at the exact path the image expects so the
+  # image's own Docker checks (persistent-mount warning, GPL FFmpeg location)
+  # keep working.
+  - type: app_config
+    path: /AgentDVR/Media/XML
+    read_only: false
+  # Recordings go to /media/agentdvr (see run.sh), which also makes them
+  # browsable in Home Assistant's Media panel.
+  - type: media
+    read_only: false
+
+# AI models are large and re-downloadable; recordings are in /media, which
+# app backups don't include anyway.
+backup_exclude:
+  - "models/*"
+
+options: {}
+schema: {}
