@@ -47,6 +47,12 @@ video: true
 services:
   - mqtt:want
 
+# Read Home Assistant Cloud's WebRTC relay (TURN) servers from Home Assistant
+# ("web_rtc/ice_servers", see HomeAssistantIce in Agent): opened through Home
+# Assistant Cloud away from home, the sidebar panel can then connect through
+# Nabu Casa's relay instead of failing. Needs Agent 8.2.4.0+.
+homeassistant_api: true
+
 map:
   # Agent's config folder, mounted at the exact path the image expects so the
   # image's own Docker checks (persistent-mount warning, GPL FFmpeg location)
