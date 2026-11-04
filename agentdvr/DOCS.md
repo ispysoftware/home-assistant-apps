@@ -16,6 +16,8 @@ There are two ways, and they work together.
 
 **Automatic, over MQTT.** If you use Home Assistant's **Mosquitto broker** app (with the MQTT integration that Home Assistant offers to set up for it), Agent DVR connects to it by itself and turns on Home Assistant discovery. Your cameras and microphones, including any you already had, then appear in Home Assistant as a device with motion, alert, connected and recording sensors and switches to arm, enable or disable it, with no setup. Install Mosquitto before Agent DVR, or restart Agent DVR after installing it. If you've already set up a different MQTT broker in Agent DVR, it's left as it is. See [Home Assistant in the user guide](https://www.ispyconnect.com/docs/agent/mqtt#home-assistant).
 
+Renaming cameras or the server in Agent DVR updates Home Assistant automatically. If you uninstall the app, its devices stay in Home Assistant: delete them under **Settings > Devices & services > MQTT**.
+
 **The Agent DVR integration** adds your cameras' live video, an alarm panel and recording actions:
 
 1. Go to **Settings > Devices & services > Add integration** and choose **Agent DVR**.
