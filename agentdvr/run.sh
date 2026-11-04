@@ -34,11 +34,19 @@ link_dir "$AGENT/Media/Overlays"   "$DATA/overlays"
 link_dir "$AGENT/Media/Floorplans" "$DATA/floorplans"
 link_dir "$AGENT/Media/sounds"     "$DATA/sounds"
 
-# WebServerRoot/Media is a VOLUME in the base image, so it is a mount point and
-# can't itself be replaced by a symlink. Its video and audio subfolders can.
-link_dir "$AGENT/Media/WebServerRoot/Media/video" "$REC/video"
-link_dir "$AGENT/Media/WebServerRoot/Media/audio" "$REC/audio"
+# Recordings. The Supervisor doesn't create the base image's anonymous VOLUME
+# here, so the folder is normally plain and the whole thing is linked to
+# /media/agentdvr. Agent versions whose storage check follows symlinks then
+# show no storage warning. If some setup does mount it, a mount point
+# can't be replaced, so fall back to linking its video and audio subfolders.
+MEDIA="$AGENT/Media/WebServerRoot/Media"
+if awk -v p="$MEDIA" '$2 == p { found = 1 } END { exit !found }' /proc/mounts; then
+    link_dir "$MEDIA/video" "$REC/video"
+    link_dir "$MEDIA/audio" "$REC/audio"
+else
+    link_dir "$MEDIA" "$REC"
+fi
 
-echo "Agent DVR: config in /config, recordings in $REC, models in $DATA/models"
+echo "Agent DVR: config in the app config folder, recordings in $REC, models in $DATA/models"
 
 exec "$AGENT/Agent.sh"
