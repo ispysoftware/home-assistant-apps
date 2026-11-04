@@ -1,4 +1,4 @@
-name: Agent DVR
+name: Agent DVR (ingress test)
 # Must match an ispysoftware/agentdvr image tag: the Dockerfile builds FROM that tag.
 # Bumped automatically, with BUILD_VERSION in the Dockerfile, by the
 # update-home-assistant-app job in ispysoftware/agentdvr-docker on each release.
@@ -22,6 +22,13 @@ ports:
 ports_description:
   8090/tcp: Web UI
 webui: http://[HOST]:[PORT:8090]/
+
+# EXPERIMENT (ingress-test branch only): show Agent's UI in Home Assistant's
+# sidebar. HA proxies it under /api/hassio_ingress/<token>/.
+ingress: true
+ingress_port: 8090
+panel_icon: mdi:cctv
+panel_title: Agent DVR
 # TCP, not HTTP: first start on a Raspberry Pi can take 30s+ and an HTTP
 # watchdog would restart it mid-boot.
 watchdog: tcp://[HOST]:[PORT:8090]
