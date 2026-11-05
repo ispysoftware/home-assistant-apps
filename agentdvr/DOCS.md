@@ -20,8 +20,10 @@ Renaming cameras or the server in Agent DVR updates Home Assistant automatically
 
 **The Agent DVR integration** adds your cameras' live video, an alarm panel and recording actions:
 
-1. Go to **Settings > Devices & services > Add integration** and choose **Agent DVR**.
-2. Enter host `127.0.0.1` and port `8090`.
+[![Open your Home Assistant instance and start setting up the Agent DVR integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=agent_dvr)
+
+1. Click the button above, or go to **Settings > Devices & services > Add integration** and choose **Agent DVR**.
+2. Enter host `127.0.0.1` and leave the port at `8090`.
 
 See the [integration documentation](https://www.home-assistant.io/integrations/agent_dvr/) for details.
 
