@@ -1,6 +1,6 @@
 # Agent DVR
 
-Agent DVR is free video surveillance software for IP, ONVIF and USB cameras. It records locally, detects people, vehicles and animals with built-in AI, and sends alerts. This app runs it on your Home Assistant machine.
+Agent DVR is video surveillance software for IP, ONVIF and USB cameras, free for personal local use (see [Licensing](#licensing)). It records locally, detects people, vehicles and animals with built-in AI, and sends alerts. This app runs it on your Home Assistant machine.
 
 ## Installation
 
@@ -53,11 +53,18 @@ The app uses host networking, so these ports must be free on your Home Assistant
 - `3478` UDP and TCP: WebRTC connection setup
 - `50000-50100` UDP: WebRTC live video
 
-## Remote access
+## Licensing
 
-Agent DVR is free for personal, local use. Viewing it from outside your home network is remote access, which needs an Agent DVR subscription. See [pricing](https://www.ispyconnect.com/buy), then activate your license in **Server Settings > Licensing**.
+Agent DVR is free for personal, local use. Free installs record at full camera resolution. A license is needed for:
 
-This includes opening the Agent DVR sidebar panel through Home Assistant's own remote access (Home Assistant Cloud / Nabu Casa, or a tunnel or reverse proxy app): without a subscription the panel explains this instead of opening Agent DVR. With one, live video works best through Agent DVR's own remote access at [ispyconnect.com](https://www.ispyconnect.com) or its mobile apps, since Home Assistant's remote access only carries the web page, not the video stream.
+- Viewing above 720p in the browser, live or in playback
+- Local learning AI
+- Remote access: viewing Agent DVR from outside your home network
+- Any business use
+
+See [pricing](https://www.ispyconnect.com/buy), then activate your license in **Server Settings > Licensing**.
+
+Remote access includes opening the Agent DVR sidebar panel through Home Assistant's own remote access (Home Assistant Cloud / Nabu Casa, or a tunnel or reverse proxy app): without a subscription the panel explains this instead of opening Agent DVR. With one, live video works best through Agent DVR's own remote access at [ispyconnect.com](https://www.ispyconnect.com) or its mobile apps, since Home Assistant's remote access only carries the web page, not the video stream.
 
 ## Moving from a standalone Docker install
 

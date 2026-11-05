@@ -4,7 +4,7 @@ name: Agent DVR
 # update-home-assistant-app job in ispysoftware/agentdvr-docker on each release.
 version: "8.2.4.0"
 slug: agentdvr
-description: Free local video surveillance with AI object detection, recording and alerts for IP, ONVIF and USB cameras.
+description: Local video surveillance with AI object detection, recording and alerts for IP, ONVIF and USB cameras. Free for personal local use; some features need a license.
 url: https://www.ispyconnect.com/
 arch:
   - aarch64
