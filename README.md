@@ -2,7 +2,9 @@
 
 Run [Agent DVR](https://www.ispyconnect.com/) on your Home Assistant machine: free local video surveillance with AI object detection, recording and alerts for IP, ONVIF and USB cameras.
 
-[![Add this repository to your Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fispysoftware%2Fhome-assistant-apps)
+[![Open Agent DVR in your Home Assistant](https://my.home-assistant.io/badges/supervisor_app.svg)](https://my.home-assistant.io/redirect/supervisor_app/?app=a910219e_agentdvr&repository_url=https%3A%2F%2Fgithub.com%2Fispysoftware%2Fhome-assistant-apps)
+
+This adds the repository if it's missing and opens the Agent DVR app, ready to install.
 
 Or add it manually: in Home Assistant open the app store (**Settings > Apps**, called **Add-ons** in older versions), open the menu in the top right, choose **Repositories** and add:
 
