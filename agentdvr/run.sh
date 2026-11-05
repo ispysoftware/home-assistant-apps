@@ -34,6 +34,25 @@ link_dir "$AGENT/Media/Overlays"   "$DATA/overlays"
 link_dir "$AGENT/Media/Floorplans" "$DATA/floorplans"
 link_dir "$AGENT/Media/sounds"     "$DATA/sounds"
 
+# Default commands and sounds. Agent only copies its defaults into a folder it
+# has to create itself, and the links above already exist, while the image's
+# Agent.sh moves Content/* up to /AgentDVR and deletes Content. So fill an empty
+# folder here, the way Agent would: from Content in a fresh container, from the
+# moved copy after a restart. Only when empty, so deleted defaults stay deleted.
+seed_dir() {
+    local name="$1" dst="$2" src
+    [[ -n "$(ls -A "$dst" 2>/dev/null)" ]] && return 0
+    for src in "$AGENT/Content/$name" "$AGENT/$name"; do
+        if [[ -d "$src" && -n "$(ls -A "$src" 2>/dev/null)" ]]; then
+            cp -an "$src/." "$dst/" 2>/dev/null || true
+            return 0
+        fi
+    done
+}
+
+seed_dir Commands "$DATA/commands"
+seed_dir sounds   "$DATA/sounds"
+
 # Recordings. The Supervisor doesn't create the base image's anonymous VOLUME
 # here, so the folder is normally plain and the whole thing is linked to
 # /media/agentdvr. Agent versions whose storage check follows symlinks then
