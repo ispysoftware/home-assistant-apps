@@ -1,6 +1,6 @@
 # Changelog
 
-Release notes for Agent DVR itself are at https://www.ispyconnect.com/producthistory?productid=27
+Release notes for Agent DVR itself are at https://www.ispyconnect.com/updates
 
 ## 8.2.3.0
 
