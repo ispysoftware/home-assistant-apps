@@ -18,7 +18,9 @@ There are two ways, and they work together.
 
 Renaming cameras or the server in Agent DVR updates Home Assistant automatically. If you uninstall the app, its devices stay in Home Assistant: delete them under **Settings > Devices & services > MQTT**.
 
-**The Agent DVR integration** adds your cameras' live video, an alarm panel and recording actions:
+**The Agent DVR integration** adds your cameras' live video, an alarm panel and recording actions. Once the app is running, Home Assistant shows **Agent DVR** as discovered under **Settings > Devices & services**: click **Add**, and if it asks for a host and port, enter `127.0.0.1` and `8090`.
+
+If it isn't offered (for example because you dismissed it), add it by hand:
 
 [![Open your Home Assistant instance and start setting up the Agent DVR integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=agent_dvr)
 

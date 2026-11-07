@@ -93,4 +93,39 @@ fi
 
 echo "Agent DVR: config in the app config folder, recordings in $REC, models in $DATA/models"
 
+# Supervisor discovery (see "discovery" in config.yaml): Home Assistant then
+# offers the Agent DVR integration under Settings > Devices & services. Sent
+# once the web UI answers, because the integration connects straight away to
+# read the server's ID. 127.0.0.1 works because Home Assistant and this app
+# both use host networking. The Supervisor ignores a repeat of the same
+# message, so sending it on every start is fine.
+announce_discovery() {
+    local i
+    if [[ -z "${SUPERVISOR_TOKEN:-}" ]]; then
+        echo "Agent DVR: no Supervisor token, skipping Home Assistant discovery"
+        return 0
+    fi
+    # First start on a Raspberry Pi can take minutes (AI models, migrations).
+    for (( i = 0; i < 120; i++ )); do
+        if (exec 3<>/dev/tcp/127.0.0.1/8090) 2>/dev/null; then
+            if curl -fsS --max-time 30 -X POST \
+                -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" \
+                -H "Content-Type: application/json" \
+                -d '{"service":"agent_dvr","config":{"host":"127.0.0.1","port":8090}}' \
+                http://supervisor/discovery >/dev/null; then
+                echo "Agent DVR: sent discovery information to Home Assistant"
+            else
+                echo "Agent DVR: discovery message to Home Assistant failed"
+            fi
+            return 0
+        fi
+        sleep 5
+    done
+    echo "Agent DVR: web UI didn't start within 10 minutes, Home Assistant discovery not sent"
+}
+
+# In the background: exec below replaces this shell, and the app's init
+# process reaps the subshell when it ends.
+announce_discovery &
+
 exec "$AGENT/Agent.sh"

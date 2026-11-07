@@ -46,6 +46,13 @@ video: true
 services:
   - mqtt:want
 
+# Announce Agent DVR to Home Assistant (run.sh posts to the Supervisor's
+# /discovery once the web UI answers) so the Agent DVR integration shows up
+# under Settings > Devices & services as discovered instead of being added by
+# hand. The Supervisor only accepts discovery for services listed here.
+discovery:
+  - agent_dvr
+
 # Read Home Assistant Cloud's WebRTC relay (TURN) servers from Home Assistant
 # ("web_rtc/ice_servers", see HomeAssistantIce in Agent): opened through Home
 # Assistant Cloud away from home, the sidebar panel can then connect through
