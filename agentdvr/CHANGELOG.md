@@ -1,5 +1,5 @@
 # Changelog
 
-## 8.3.4.0
+## 8.3.5.0
 
 Release notes: https://www.ispyconnect.com/updates
